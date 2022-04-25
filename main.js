@@ -20,20 +20,95 @@ function drawGrid() {
 }
 
 function drawPlayer() {
-  const player = new Image();
-  player.src = "./images/character-down.png";
-  player.onload = () => ctx.drawImage(player, 200, 100, 50, 50);
+  const playerDown = new Image();
+  playerDown.src = "./images/character-down.png";
+  ctx.drawImage(playerDown, 200, 200, 50, 50);
+
+  const playerLeft = new Image();
+  playerLeft.src = "./images/character-left.png";
+  ctx.drawImage(playerLeft, 100, 100, 50, 50);
+
+  const playerRight = new Image();
+  playerRight.src = "./images/character-right.png";
+  ctx.drawImage(playerRight, 150, 150, 50, 50);
+
+  const playerUp = new Image();
+  playerUp.src = "./images/character-up.png";
+  ctx.drawImage(playerUp, 300, 300, 50, 50);
 }
-function drawTreasure() {
-  const treasure = new Image();
-  treasure.src = "./images/treasure.png";
-  treasure.onload = () => ctx.drawImage(treasure, 0, 0, 50, 50);
+
+/* function drawTreasure() {
+    const treasure = new Image();
+    treasure.src = "./images/treasure.png";
+    treasure.onload = () => ctx.drawImage(treasure, 0, 0, 50, 50); */
+
+
+class Character {
+  constructor(row, col) {
+    this.row = row;
+    this.col = col;
+  }
+  moveUp() {
+    this.row -= 1;
+  }
+  moveRight() {
+    this.col += 1;
+  }
+  moveDown() {
+    this.row += 1;
+  }
+  moveLeft() {
+    this.col -= 1;
+  }
 }
+
+class Treasure {
+  constructor(x, y) {
+   this.x = x;
+   this.y= y;
+   this.setRandomPosition()
+  }
+
+  draw() {
+    const treasure = new Image();
+    treasure.src = "./images/treasure.png";
+    treasure.onload = () => ctx.drawImage(treasure, this.x,this.y, 50, 50);
+
+  }
+
+  setRandomPosition(){
+      this.x = Math.floor(Math.random() * 10) * 50;
+      this.y = Math.floor(Math.random() * 10) * 50
+  }
+}
+
+
+const character = new Character()
+const treasure = new Treasure()
 
 function drawEverything() {
-  drawGrid();
-  drawPlayer();
-  drawTreasure();
-}
+    drawGrid();
+    drawPlayer();
+    treasure.draw();
+  }
 
-drawEverything();
+  
+window.addEventListener("keydown", (event) => {
+  event.preventDefault();
+  switch (event.keyCode) {
+    case 37:
+      console.log("left");
+      break;
+    case 38:
+      console.log("up");
+      break;
+    case 39:
+      console.log("right");
+      break;
+    case 40:
+      console.log("down");
+      break;
+  }
+});
+
+window.onload = ()=>drawEverything();
