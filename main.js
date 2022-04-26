@@ -36,11 +36,7 @@ function drawPlayer() {
   playerUp.src = "./images/character-up.png";
   ctx.drawImage(playerUp, 300, 300, 50, 50);
 }
-
-/* function drawTreasure() {
-    const treasure = new Image();
-    treasure.src = "./images/treasure.png";
-    treasure.onload = () => ctx.drawImage(treasure, 0, 0, 50, 50); */
+drawPlayer();
 
 
 class Character {
@@ -78,7 +74,7 @@ class Treasure {
 
   setRandomPosition(){
       this.x = Math.floor(Math.random() * 10) * 50;
-      this.y = Math.floor(Math.random() * 10) * 50
+      this.y = Math.floor(Math.random() * 10) * 50;
   }
 }
 
